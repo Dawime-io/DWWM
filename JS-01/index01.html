@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Les Noeuds du HTML DOM</title>
+    <style>
+        .green {color:green;}
+    </style>
+  </head>
+  <body>
+    <h1>Quelques fonctions sur les Nodes (Noeuds)</h1><h2>Voir le code pour les explications</h2>
+    <script type="text/javascript">
+      var tagHtml = document.childNodes[0] ;// le premier enfant du document est ici : html
+      document.write('le nom du noeud tagHtml (premier enfant du document ) est : ' + tagHtml.nodeName + '<br>');
+      
+      //on va extraire le nom de son premier enfant :
+      var Child = tagHtml.childNodes[0]; // normalement ici on obtient HEAD 
+      document.write('Premier enfant de tagHtml est : ' + Child.nodeName + '<br>');
+      // listons les enfants de HEAD
+      document.write("Les noeuds enfants de HEAD : (les retours à la ligne sont des enfants aussi.)<br>");
+      // on voit ici que les retours à la ligne sont considérés comme des enfants de HEAD
+      Child.childNodes.forEach(item => {
+          document.write("Nom Enfant : " + item.nodeName + " .");
+          document.write(" la valeur de cet enfant est : " + item.innerHTML + " <br>");
+      });
+      
+      // les noeuds peuvent etre ciblés aussi par first Child et lastChild
+      document.write('Premier enfant : ' + tagHtml.firstChild.nodeName + '<br />');
+      document.write('Dernier enfant : ' + tagHtml.lastChild.nodeName + '<br />');
+
+      document.write('Le deuxieme enfant de body est : ');
+      document.write(tagHtml.lastChild.childNodes[1].nodeName + '<br>'); // on saute le premier enfant car c'est un retour à la ligne
+
+      // on peut aussi utiliser "noeud-frere"
+      document.write("Le frère de l'element H1 est : ");
+      document.write(tagHtml.lastChild.childNodes[1].nextSibling.nodeName + '<br>');
+      document.write("sa veleur est :  " + tagHtml.lastChild.childNodes[1].nextSibling.innerHTML + '<br>');
+      document.write("Ici on obtient H2 car il n'ya pas d'espace ou de retour à la ligne entre h1 et h2.<br>");
+
+      document.write("le dernier enfant de tagHtml est : ");
+      document.write(tagHtml.lastChild.nodeName + '<br>');
+      document.write("Les noeuds ont un type. par exemple le type de body est : ");
+      document.write(tagHtml.lastChild.nodeType + "<br>")
+    </script>
+    <p>
+       les types les plus rencontrés en général sont :<br>
+       1 : element <br>
+       2 : attribut <br>
+       3 : text<br>
+       8 : commentaire <br>
+
+       Note: cette information est en lecture seule et n'est pas modifiable.
+    </p>
+  </body>
+</html>

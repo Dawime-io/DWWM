@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modification du HTML DOM</title>
+  </head>
+  <body>
+    <p>L'une des façons la plus simple pour modifier un DOM est l'utilisation de innerHTML :</p>
+    <p> On accède à un element par getElementById, ByTagName ou ByClassName … etc.  <br> 
+     Ensuite on modifie son innerHTML on y ajoutant du texte, des tags complets contenant d’autres tags...etc.</p>
+    <p>
+        Mais une autre façon efficace également est l’utilisation de createElement et createTextNode. <br>
+        La méthode createElement permet de créer un élément et retourne une référence vers celui-ci. <br>
+        La méthode createTextNode permet de créer un nœud de type texte pouvant être ajouté à un élément de type node
+    </p>
+    <p>
+      Attention, ces tags sont créés dans la mémoire mais ne sont pas encore intégrés au DOM. <br>
+      Pour les’y intégrer, il faut utiliser l’une des nombreuses fonctions dédiées, spécialement : appendChild et insertBefore. <br>
+    </p>
+    <p>appendChild ajoute l’élément créé à la fin du parent cible. Alors que insertBefore permet de le positionner de façon précise par rapport à un autre enfant de la cible.</p>
+    <p>Si on utilise appendChild ou insertBefore pour attacher un élément à un nœud, il n’apparaitra dans le HTML DOM de la page que si ce nœud est lui-même attaché au DOM.</p>
+
+    <p>
+        Exemple : on crée un nœud « section », et deux nœuds « h1 » et « p ». On ajoute le « h1 » et le « p » à la « section », si on ajoute pas section au document, alors ce paragraphe et ce titre n’apparaîtront pas sur la page. <br>
+        Voici un mini code –exemple :
+    </p>
+
+    <hr>
+
+    <div id="montest">
+    </div>
+
+    <script>
+        let mysection = document.createElement('section');
+        let myp = document.createElement('p');
+        let myh1 = document.createElement('h1');
+        myh1.appendChild(document.createTextNode("Titre de test"));
+        myp.innerHTML = "ceci est un paragraphe de test";
+        mysection.appendChild(myh1);
+        mysection.appendChild(myp);
+
+        // ici si on n'ajoute pas mysection au document, elle ne sera pas visible dans le navigateur
+
+        // on va donc l'ajouter:
+
+        let idTest = document.getElementById("montest");
+        idTest.appendChild(mysection); // mettre cette ligne en commentaire pour voir l'effet d'une absence d'ajout
+
+    </script>
+
+
+  </body>
+</html>
